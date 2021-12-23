@@ -1,0 +1,23 @@
+{
+  "name": "web_simplified_nodejs_express_mongodb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js",
+    "devStart": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.7.4",
+    "express": "^4.17.2",
+    "express-ejs-layouts": "^2.5.1",
+    "mongoose": "^5.13.13"
+  },
+  "devDependencies": {
+    "dotenv": "^6.2.0",
+    "nodemon": "^2.0.15"
+  }
+}
