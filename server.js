@@ -1,6 +1,8 @@
-// Load the environment variables from .env file in the root directory when we are not in production
-// In heroku, NODE_ENV is automatically set to production
-// So in heroku the environmental variables that we set in the settings of heroku app will be used
+/**
+ * Load the environment variables from .env file in the root directory when we are not in production
+ * In heroku, NODE_ENV is automatically set to production
+ * So in heroku the environmental variables that we set in the settings of heroku app will be used
+ */
 if (process.env.NODE_ENV !== 'production') require('dotenv').load()
 
 const express = require('express')

@@ -1,7 +1,4 @@
 const mongoose = require('mongoose')
-const path = require('path')
-
-const coverImageBasePath = 'uploads/bookCovers'
 
 const bookSchema = new mongoose.Schema({
     title: {
@@ -25,12 +22,13 @@ const bookSchema = new mongoose.Schema({
         required: true,
         default: Date.now,
     },
-    // Instead of passing image itself into the database,
-    // we're going to pass the name of the image
-    // So we can just store a single small string
-    // And then we can store the actual image itself on our server in file system
-    // You always want to store files in the file system when you can
-    coverImageName: {
+    // Cover image itself
+    coverImage: {
+        type: Buffer,
+        required: true,
+    },
+    // The file type of the image
+    coverImageType: {
         type: String,
         required: true,
     },
@@ -42,14 +40,12 @@ const bookSchema = new mongoose.Schema({
     },
 })
 
-// We need this to access the actual path of image in front end
 // We cannot use arrow function in here
 // Because we need to this keywork which is related to book itself
 bookSchema.virtual('coverImagePath').get(function () {
-    if (this.coverImageName != null) {
-        return path.join('/', coverImageBasePath, this.coverImageName)
+    if (this.coverImage != null && this.coverImageType != null) {
+        return `data:${this.coverImageType};charset=utf-8;base64,${this.coverImage.toString('base64')}`
     }
 })
 
 module.exports = mongoose.model('Book', bookSchema)
-module.exports.coverImageBasePath = coverImageBasePath
