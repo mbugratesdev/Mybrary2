@@ -9,6 +9,7 @@ const express = require('express')
 const app = express()
 const expressLayouts = require('express-ejs-layouts')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 // Set our view engine
 app.set('view engine', 'ejs')
@@ -18,6 +19,8 @@ app.set('views', __dirname + '/views')
 app.set('layout', 'layouts/layout')
 // Tell express we want to use express layouts
 app.use(expressLayouts)
+// To change request type of requests with has req.body._method
+app.use(methodOverride('_method'))
 // Tell express where our public files are going to be
 app.use(express.static('public'))
 // To get requests in json format
